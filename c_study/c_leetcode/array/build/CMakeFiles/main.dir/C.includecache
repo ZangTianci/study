@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../inc/twoSum.h
+stdio.h
+-
+
+/home/ztc/code/c_study/c_leetcode/array/src/twoSum.c
+twoSum.h
+/home/ztc/code/c_study/c_leetcode/array/src/twoSum.h
+

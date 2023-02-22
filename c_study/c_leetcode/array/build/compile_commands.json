@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/ztc/code/c_study/c_leetcode/array/build",
+  "command": "/usr/bin/gcc  -I/home/ztc/code/c_study/c_leetcode/array/inc  -g   -o CMakeFiles/main.dir/main.c.o   -c /home/ztc/code/c_study/c_leetcode/array/main.c",
+  "file": "/home/ztc/code/c_study/c_leetcode/array/main.c"
+},
+{
+  "directory": "/home/ztc/code/c_study/c_leetcode/array/build",
+  "command": "/usr/bin/gcc  -I/home/ztc/code/c_study/c_leetcode/array/inc  -g   -o CMakeFiles/main.dir/src/twoSum.c.o   -c /home/ztc/code/c_study/c_leetcode/array/src/twoSum.c",
+  "file": "/home/ztc/code/c_study/c_leetcode/array/src/twoSum.c"
+}
+]

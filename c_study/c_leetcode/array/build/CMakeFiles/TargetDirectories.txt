@@ -1,0 +1,3 @@
+/home/ztc/code/c_study/c_leetcode/array/build/CMakeFiles/rebuild_cache.dir
+/home/ztc/code/c_study/c_leetcode/array/build/CMakeFiles/edit_cache.dir
+/home/ztc/code/c_study/c_leetcode/array/build/CMakeFiles/main.dir
