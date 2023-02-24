@@ -4,30 +4,25 @@
 
 int g_data = 0;
 
+pthread_mutex_t mutex;
+
 void *func1(void *arg)
 {
+    pthread_mutex_lock(&mutex);
 
-    printf("%ld thread is create\n", (unsigned long)pthread_self());
+    printf("%ld thread1 is create\n", (unsigned long)pthread_self());
     printf("param is %d\n", *((int *)arg));
-    while(1){
-        printf("t1:%d\n", g_data++);
-        sleep(1);
-        if(g_data == 3){
-            pthread_exit(NULL);
-        }
-    }
-
+    
+    pthread_mutex_unlock(&mutex);
 }
 
 void *func2(void *arg)
 {
-
-    printf("%ld thread is create\n", (unsigned long)pthread_self());
+    pthread_mutex_trylock(&mutex);
+    printf("%ld thread2 is create\n", (unsigned long)pthread_self());
     printf("param is %d\n", *((int *)arg));
-    while(1){
-        printf("t2:%d\n", g_data++);
-        sleep(1);
-    }
+
+    pthread_mutex_unlock(&mutex);
 
 }
 
@@ -38,6 +33,8 @@ int main()
     int param = 100;
     pthread_t t1;
     pthread_t t2;
+
+    pthread_mutex_init(&mutex, NULL);
 
 
     ret1 = pthread_create(&t1, NULL, func1, (void *)&param);
@@ -54,6 +51,8 @@ int main()
     
     pthread_join(t1, NULL);
     pthread_join(t2, NULL);
+
+    pthread_mutex_destroy(&mutex);
 
     
     return 0;
