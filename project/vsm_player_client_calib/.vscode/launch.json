@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+                // !注意：AB型的光轴偏移不同。A型200,250,160,120时；B型200,250,120,160
+
+    "configurations": [
+        {
+            "name": "Python: 当前文件",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args": [
+                "--path","/media/ztc/Data/work/calibrate/MD/247_f6bd323e0652/",
+                "--gridSize","45",
+                "--chessBoardShape","8","11",
+                "--vsm_type","a",
+                "--sub_vsm_type","1"
+            ]
+        }
+    ]
+}
