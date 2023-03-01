@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "config.h": "c",
+        "fcntl.h": "c",
+        "inet.h": "c",
+        "in.h": "c",
+        "cstdio": "c",
+        "*.tcc": "c"
+    }
+}
