@@ -37,6 +37,7 @@ int oled_demo(struct display_info *disp) {
 	disp->font = font1;
 	//	oled_putstrto(disp, 0, 54, "Total cur  2.36 A");
 	oled_putstrto(disp, 0, 54, "*****************");
+	// 前面把数据放入缓存，这边发送缓存
 	oled_send_buffer(disp);
 
 	disp->font = font3;
