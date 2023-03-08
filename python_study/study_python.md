@@ -443,3 +443,331 @@ def fact_iter(num, product):
     if num == 1:
         return product
     return fact_iter(num-1, num*product)
+```
+## 高级特性
+### 切片
+取一个list或tuple的部分元素
+```bash
+>>> L = ['Michael', 'Sarah', 'Tracy', 'Bob', 'Jack']
+```
+笨方法：
+```bash
+>>> [L[0], L[1], L[2]]
+['Michael', 'Sarah', 'Tracy']
+```
+切片，从0开始，不包括3
+```bash
+>>> L[0:3]
+['Michael', 'Sarah', 'Tracy']
+```
+每五个取一个
+```bash
+>>> L[::5]
+```
+### 迭代
+如果给定一个list或tuple，我们可以通过`for`循环来遍历这个list或tuple，这种遍历我们称为迭代（Iteration）。
+
+当使用for循环时，只要作用于一个可迭代对象，for循环就可以正常运行。
+### 迭代生成器
+### 生成器
+### 迭代器
+## 函数式编程
+### 高阶函数
+#### map/reduce
+`map()`接收两个参数，一个是函数，一个是iterable。map将传入函数依次作用到序列的每个元素。
+```bash
+>>> def f(x):
+...     return x * x
+...
+>>> r = map(f, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+>>> list(r)
+[1, 4, 9, 16, 25, 36, 49, 64, 81]
+```
+`reduce()`把一个函数作用在一个序列上，累积运算。
+```bash
+>>> from functools import reduce
+>>> def add(x, y):
+...     return x + y
+...
+>>> reduce(add, [1, 3, 5, 7, 9])
+25
+```
+#### filter
+`filter()`函数用于过滤序列，把传入的函数依次作用于序列的每个元素，由返回值是`True`还是`False`决定保留还是丢弃该元素。
+```python
+def is_odd(n):
+    return n % 2 == 1
+
+list(filter(is_odd, [1, 2, 4, 5, 6, 9, 10, 15]))
+# 结果: [1, 5, 9, 15]
+```
+#### sorted
+排序算法
+### 返回函数
+函数作为返回值
+### 匿名函数
+### 装饰器
+`decorator`\
+函数对象有一个`__name__`属性，可以拿到函数名字
+```bash
+>>> now.__name__
+'now'
+>>> f.__name__
+'now'
+```
+### 偏函数
+`int()`函数提供额外的`base`参数，默认为10。
+```bash
+>>> int('12345', base=8)
+5349
+>>> int('12345', 16)
+74565
+```
+`functools.partial`就是帮助我们创建一个偏函数的
+```bash
+>>> import functools
+>>> int2 = functools.partial(int, base=2)
+>>> int2('1000000')
+64
+>>> int2('1010101')
+85
+```
+## 模块
+创建一个hello.py文件
+```python
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+' a test module '
+
+__author__ = 'Tian shu'
+
+import sys
+
+def test():
+    args = sys.argv
+    if len(args)==1:
+        print('Hello, world!')
+    elif len(args)==2:
+        print('Hello, %s!' % args[1])
+    else:
+        print('Too many arguments!')
+
+if __name__=='__main__':
+    test()
+```
+第1行注释可以让这个hello.py文件直接在Unix/Linux/Mac上运行\
+第2行注释表示.py文件本身使用标准UTF-8编码\
+第4行是一个字符串，表示模块的文档注释，任何模块代码的第一个字符串都被视为模块的文档注释；\
+第6行使用`__author__`变量把作者写进去，这样当你公开源代码后别人就可以瞻仰你的大名；\
+`sys`模块有一个`argv`变量，用list存储了命令行的所有参数。`argv`至少有一个元素，因为第一个参数永远是该.py文件的名称，例如：
+
+运行python3 hello.py获得的sys.argv就是['hello.py']；
+
+运行python3 hello.py Michael获得的sys.argv就是['hello.py', 'Michael']。
+
+当我们在命令行运行hello模块文件时，Python解释器把一个特殊变量__name__置为__main__，而如果在其他地方导入该hello模块时，if判断将失败，因此，这种if测试可以让一个模块通过命令行运行时执行一些额外的代码，最常见的就是运行测试。
+## 面向对象编程
+面向对象编程——Object Oriented Programming，简称OOP，是一种程序设计思想。OOP把对象作为程序的基本单元，一个对象包含了数据和操作数据的函数。
+### 类和实例
+类class
+```python
+class Student(object):
+    def __init__(self, name, score):
+        self.name = name
+        self.score = score
+```
+class后面紧接着是类名，即Student，类名通常是大写开头的单词，紧接着是(object)，表示该类是从哪个类继承下来的，继承的概念我们后面再讲，通常，如果没有合适的继承类，就使用object类，这是所有类最终都会继承的类。\
+定义好了Student类，就可以根据Student类创建出Student的实例，创建实例是通过类名+()实现的\
+
+注意到__init__方法的第一个参数永远是self，表示创建的实例本身，因此，在__init__方法内部，就可以把各种属性绑定到self，因为self就指向创建的实例本身。
+
+有了__init__方法，在创建实例的时候，就不能传入空的参数了，必须传入与__init__方法匹配的参数，但self不需要传，Python解释器自己会把实例变量传进去
+### 访问限制
+在Python中，实例的变量名如果以__开头，就变成了一个私有变量（private），只有内部可以访问，外部不能访问
+```python
+class Student(object):
+
+    def __init__(self, name, score):
+        self.__name = name
+        self.__score = score
+
+    def print_score(self):
+        print('%s: %s' % (self.__name, self.__score))
+```
+改完后，对于外部代码来说，没什么变动，但是已经无法从外部访问实例变量.__name和实例变量.__score了
+```bash
+>>> bart = Student('Bart Simpson', 59)
+>>> bart.__name
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+AttributeError: 'Student' object has no attribute '__name'
+```
+### 继承和多态
+在OOP程序设计中，当我们定义一个class的时候，可以从某个现有的class继承，新的class称为子类（Subclass），而被继承的class称为基类、父类或超类（Base class、Super class）。
+
+对于静态语言（例如Java）来说，如果需要传入Animal类型，则传入的对象必须是Animal类型或者它的子类，否则，将无法调用run()方法。\
+对于Python这样的动态语言来说，则不一定需要传入Animal类型。我们只需要保证传入的对象有一个run()方法就可以了
+### 获取对象信息
+首先，我们来判断对象类型，使用`type()`函数
+### 实例属性和类属性
+## 面向对象高级编程
+### 使用__slots__
+### 使用@property
+### 多重继承
+MixIn
+### 定制类
+### 使用枚举类
+为这样的枚举类型定义一个class类型，然后，每个常量都是class的一个唯一实例。Python提供了Enum类来实现这个功能
+```python
+from enum import Enum
+
+Month = Enum('Month', ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'))
+```
+### 使用元类
+## 错误、调试和测试
+### 错误处理
+try\
+[常见错误类型和继承关系](https://docs.python.org/3/library/exceptions.html#exception-hierarchy)
+### 调试
+assert
+### 单元测试
+### 文档测试
+## IO编程
+### 文件读写
+```python
+f = open('/Users/michael/test.txt', 'r')
+f.read()
+f.close()
+
+with open('/Users/michael/test.txt', 'w') as f:
+    f.write('Hello, world!')
+
+with open('/path/to/file', 'r') as f:
+    print(f.read())
+
+for line in f.readlines():
+    print(line.strip()) # 把末尾的'\n'删掉
+```
+二进制文件
+```bash
+>>> f = open('/Users/michael/test.jpg', 'rb')
+>>> f.read()
+b'\xff\xd8\xff\xe1\x00\x18Exif\x00\x00...' # 十六进制表示的字节
+```
+### StringIO和BytesIO
+StringIO顾名思义就是在内存中读写str。\
+要把str写入StringIO，我们需要先创建一个StringIO，然后，像文件一样写入即可：
+```bash
+>>> from io import StringIO
+>>> f = StringIO()
+>>> f.write('hello')
+5
+>>> f.write(' ')
+1
+>>> f.write('world!')
+6
+>>> print(f.getvalue())
+hello world!
+```
+`getvalue()`方法用于获得写入后的str。\
+要读取StringIO，可以用一个str初始化StringIO，然后，像读文件一样读取：
+```bash
+>>> from io import StringIO
+>>> f = StringIO('Hello!\nHi!\nGoodbye!')
+>>> while True:
+...     s = f.readline()
+...     if s == '':
+...         break
+...     print(s.strip())
+...
+Hello!
+Hi!
+Goodbye!
+```
+StringIO操作的只能是str，如果要操作二进制数据，就需要使用BytesIO。\
+BytesIO实现了在内存中读写bytes，我们创建一个BytesIO，然后写入一些bytes
+```bash
+>>> from io import BytesIO
+>>> f = BytesIO()
+>>> f.write('中文'.encode('utf-8'))
+6
+>>> print(f.getvalue())
+b'\xe4\xb8\xad\xe6\x96\x87'
+```
+### 操作文件和目录
+```bash
+>>> import os
+>>> os.name # 操作系统类型
+'posix'
+```
+如果是`posix`，说明系统是Linux、Unix或Mac OS X，如果是`nt`，就是Windows系统。
+要获取详细的系统信息，可以调用uname()函数：
+```bash
+>>> os.uname()
+posix.uname_result(sysname='Linux', nodename='ztc-ubuntu', release='5.14.0-1057-oem', version='#64-Ubuntu SMP Mon Jan 23 17:02:19 UTC 2023', machine='x86_64')
+```
+注意uname()函数在Windows上不提供，也就是说，os模块的某些函数是跟操作系统相关的
+
+环境变量\
+在操作系统中定义的环境变量，全部保存在`os.environ`这个变量中，可以直接查看\
+要获取某个环境变量的值，可以调用`os.environ.get('key')`\
+
+操作文件和目录\
+操作文件和目录的函数一部分放在os模块中，一部分放在os.path模块中，这一点要注意一下。查看、创建和删除目录可以这么调用
+```bash
+# 查看当前目录的绝对路径:
+>>> os.path.abspath('.')
+'/Users/michael'
+# 在某个目录下创建一个新目录，首先把新目录的完整路径表示出来:
+>>> os.path.join('/Users/michael', 'testdir')
+'/Users/michael/testdir'
+# 然后创建一个目录:
+>>> os.mkdir('/Users/michael/testdir')
+# 删掉一个目录:
+>>> os.rmdir('/Users/michael/testdir')
+```
+通过`os.path.split()`函数，这样可以把一个路径拆分为两部分，后一部分总是最后级别的目录或文件名\
+`os.path.splitext()`可以直接让你得到文件扩展名\
+`shutil`模块提供了`copyfile()`的函数
+### 序列化
+把变量从内存中变成可存储或传输的过程称之为序列化，在Python中叫`pickling`，在其他语言中也被称之为serialization，marshalling，flattening等等\
+序列化之后，就可以把序列化后的内容写入磁盘，或者通过网络传输到别的机器上。\
+反过来，把变量内容从序列化的对象重新读到内存里称之为反序列化，即unpickling。\
+Python提供了pickle模块来实现序列化
+```bash
+>>> import pickle
+>>> d = dict(name='Bob', age=20, score=88)
+>>> pickle.dumps(d)
+b'\x80\x03}q\x00(X\x03\x00\x00\x00ageq\x01K\x14X\x05\x00\x00\x00scoreq\x02KXX\x04\x00\x00\x00nameq\x03X\x03\x00\x00\x00Bobq\x04u.'
+```
+`pickle.dumps()`方法把任意对象序列化成一个bytes，然后，就可以把这个bytes写入文件。或者用另一个方法`pickle.dump()`直接把对象序列化后写入一个file-like Object
+```bash
+>>> f = open('dump.txt', 'wb')
+>>> pickle.dump(d, f)
+>>> f.close()
+```
+#### JSON
+```bash
+>>> import json
+>>> d = dict(name='Bob', age=20, score=88)
+>>> json.dumps(d)
+'{"age": 20, "score": 88, "name": "Bob"}'
+```
+dumps()方法返回一个str，内容就是标准的JSON。类似的，dump()方法可以直接把JSON写入一个file-like Object。\
+要把JSON反序列化为Python对象，用loads()或者对应的load()方法，前者把JSON的字符串反序列化，后者从file-like Object中读取字符串并反序列化：\
+```bash
+>>> json_str = '{"age": 20, "score": 88, "name": "Bob"}'
+>>> json.loads(json_str)
+{'age': 20, 'score': 88, 'name': 'Bob'}
+```
+由于JSON标准规定JSON编码是UTF-8，所以我们总是能正确地在Python的str与JSON的字符串之间转换
+
+
+
+
+
+
+
+
+
