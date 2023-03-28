@@ -1,0 +1,5 @@
+{
+ "name=server_addr": "192.168.1.145",
+ "name=work_mode": "0",
+ "name=image_set_point": "120.0"
+}

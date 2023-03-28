@@ -1,0 +1,9 @@
+{
+ "name=vendor_name": "Magicdepth",
+ "name=server_addr": "192.168.1.16",
+ "name=do_connect_em_server": "0",
+ "name=em_server_addr": "192.168.1.16",
+ "name=nfs_server_ip_address": "192.168.1.16",
+ "name=socket_addr1": "192.168.1.16",
+ "name=socket_addr2": "192.168.1.16"
+}

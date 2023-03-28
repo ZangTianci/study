@@ -1,0 +1,162 @@
+##########################################
+# opencv2
+##########################################
+##########################################
+# 读取图片
+##########################################
+cv2.IMREAD_GRAYSCALE读取灰度图片
+img = cv2.imread('1.jpg', cv2.IMREAD_GRAYSCALE)
+
+##########################################
+# RGB转GRAY
+##########################################
+gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+
+##########################################
+# 保存图片
+##########################################
+cv2.imwrite("D:\demo\LeftImage\gray.png",image)
+
+##########################################
+# 所有图片输出为列表
+##########################################
+inum=os.listdir(r'D:\demo\LeftImage')
+
+##########################################
+# 路径组合
+##########################################
+os.path.join(path,pic_num)
+
+##########################################
+# 输出当前目录下所有目录
+##########################################
+dir = os.listdir(os.getcwd())
+
+##########################################
+# 对yml文件进行操作
+##########################################
+import cv2
+import numpy as np
+# 创建abc.yml文件
+fs = cv2.FileStorage('abc.yml', cv2.FileStorage_WRITE)
+# 输入矩阵，名字为mat1，mat2
+fs.write('mat1', np.random.uniform(0, 1, [2, 2]))
+fs.write('mat2', np.random.randint(0, 10, [2, 2]))
+# 输入float数字，名字为num1，num2
+fs.write('num1', 1)
+fs.write('num2', 2.5)
+# 输入字符串，名字为str1，str2
+fs.write('str1', 'abc')
+fs.write('str2', '你好')
+# 关闭文件
+fs.release()
+# 读取abc.yml文件
+fs2 = cv2.FileStorage('abc.yml', cv2.FileStorage_READ)
+# 以矩阵格式读取mat1
+mat1 = fs2.getNode('mat1').mat()
+mat2 = fs2.getNode('mat2').mat()
+# 以float格式读取num1
+num1 = fs2.getNode('num1').real()
+num2 = fs2.getNode('num2').real()
+# 以字符串格式读取str1
+str1 = fs2.getNode('str1').string()
+str2 = fs2.getNode('str2').string()
+# 关闭文件
+fs2.release()
+
+##########################################
+# 压缩
+##########################################
+zip=zipfile.ZipFile(os.path.join(out_path,f"{path.split('/')[-4]}_{path.split('/')[-2]}_{path.split('/')[-1]}.zip"),'w')
+for file in filter_path_list:
+    zip.write(file)
+zip.close()
+
+##########################################
+# 读取JSON
+##########################################
+import json
+with open(os.path.join(path,'head_falldown_detection.json'),'r')as fp:
+        json_data = json.load(fp)
+
+##########################################
+# 传参
+##########################################
+path = sys.argv[1]
+out_path = sys.argv[2]
+
+##########################################
+# 创建文件夹（已存在）
+##########################################
+os.makedirs(out_path,exist_ok=True)
+
+##########################################
+# 判断字符串是否为空
+##########################################
+1.如果 len(s) ==0 则字符串为空
+2.如果s.isspace() 为True 字符串为空，否则非空 
+  isspace判断是否字符串全部是空格
+3.if s == '' 字符串为空，否则非空
+4.strip() 方法用于移除字符串头尾指定的字符（默认为空格或换行符）或字符序列。
+
+##########################################
+# 复制文件到文件夹
+##########################################
+import shutil
+shutil.copy(self.mainw.piconwin,self.rightpath)
+
+# 列表迭代器
+self.pic=os.listdir(self.img_path)
+# 按名字排序
+self.pic.sort()
+# 循环列表
+self.pic=cycle(self.pic)
+# 将列表生成迭代器
+self.it=iter(self.pic)
+# 下一个
+next(self.it)
+
+# 实现cmd功能
+os.system("adb connect 192.168.1.157")
+
+##########################################
+# hour前补零,补位
+##########################################
+ex='%02d'%hour
+f'{hour:0>2d}'
+
+##########################################
+# 死程序报错,报异常,捕获异常
+##########################################
+raise ValueError('无效的边长')
+- 捕获异常
+try:
+  pass
+except ValueError as err:
+  print(err)
+
+##########################################
+# 面向对象
+##########################################
+对象 = 数据 + 函数（方法）
+类里面写的函数，通常称之为方法，基本上都是发给对象的消息
+但是有时候需要发给类
+------------------------------------------
+发给类，而不是发给对象的消息
+静态方法 - 发给类
+# 装饰器
+@staticmethod
+def is_valid(a, b, c):
+  pass
+类方法 - 发给类，第一个参数（cls）是接受消息的类
+@classmethod
+def is_valid(cls, a, b, c):
+  pass
+
+-身份运算符
+is
+
+-魔术方法 -> 有特殊用途
+__str__ 获得对象的字符串表示，在调用print输出对象时候会被自动调用
+__init__ 初始化方法，在调用构造器语法创建对象时候会被自动调用 
+__repr__ 

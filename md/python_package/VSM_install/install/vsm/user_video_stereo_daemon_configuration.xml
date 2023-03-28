@@ -1,0 +1,31 @@
+<cd_configurations name=rk3399>
+  <configuration name=default_configuration>
+    <module name=common_config>
+      <record name=console_configuration_file_name type=string value=console_configuration_file></record>
+      <record name=netcard_name type=string value=eth0></record>
+
+      <record name=daemon_listen_socket_addr type=string value=0.0.0.0></record>
+      <record name=daemon_listen_socket_port type=integer value=1025></record>
+      <record name=local_heartbeat_interval_in_second type=integer value=2></record>
+      <record name=module_upgrade_socket_addr type=string value=0.0.0.0></record>
+      <record name=module_upgrade_socket_port type=integer value=1026></record>
+
+      <record name=upgrade_tarball_name type=string value=rk3399_video_stereo_server.tgz></record>
+      <record name=application_name type=string value=video_stereo_daemon></record>
+      <record name=application_install_path type=string value=/system/bin/></record>
+
+      <record name=monitor_process_number type=integer value=1></record>
+      <record name=process1 type=container>
+        <record name=item_enable type=integer value=1></record>
+        <record name=process_name type=string value=video_stereo_server_V2></record>
+        <record name=command_line type=string value=/data/vsm/vpm/base/video_stereo_server_V2></record>
+        <record name=argument type=string value=1></record>
+        <record name=check_period type=integer value=15></record>
+        <record name=immediately_execute type=integer value=0></record>
+        <record name=reboot_machine type=integer value=0></record>
+      </record>
+    </module>
+  </configuration>
+  <configuration name=test_configuration>
+  </configuration>
+</cd_configurations>

@@ -1,0 +1,279 @@
+<cd_configurations name=ubuntu_ocr>
+  <configuration name=default_configuration>
+    <module name=common_config>
+      <record name=console_configuration_file_name type=string value=console_configuration_file></record>
+      <record name=netcard_name type=string value=enp2s0></record>
+      <record name=daemon_listen_socket_addr type=string value=127.0.0.1></record>
+      <record name=daemon_listen_socket_port type=integer value=1025></record>
+      <record name=local_heartbeat_socket_addr type=string value=0.0.0.0></record>
+      <record name=local_heartbeat_socket_port type=integer value=1032></record>
+      <record name=local_heartbeat_interval_in_second type=integer value=2></record>
+      <record name=application_name type=string value=vision_processing_server></record>
+    </module>
+    <module name=control_center>
+      <record name=serial_number type=string value=MV201220215001></record>
+      <record name=vendor_name type=string value=Magicdepth></record>
+      <record name=escalator_name type=string value=vpm_escalator></record>
+      <record name=socket_config type=container>
+        <record name=netcard_name type=string value=eth0></record>
+        <record name=server_addr type=string value=192.168.1.16></record>
+        <record name=server_port type=integer value=51102></record>
+      </record>
+      <record name=vpm_device_type type=integer value=1></record>
+      <record name=connect_x3_config type=container>
+        <record name=x3_addr type=string value=192.168.1.250></record>
+        <record name=x3_info_port type=integer value=51036></record>
+        <record name=x3_stream_port type=integer value=51038></record>
+      </record>
+      <record name=test_mode type=integer value=0></record>
+      <record name=status_sample_config type=container>
+        <record name=enable_sample_hb_status type=integer value=1></record>
+        <record name=enable_sample_vsm_image type=integer value=1></record>
+      </record>
+      <record name=log_level type=integer value=1></record>
+    </module>
+    <module name=stream_center>
+      <record name=system_mode type=container>
+        <record name=master_mode type=integer value=1></record>
+        <record name=master_addr type=string value=0.0.0.0></record>
+        <record name=master_port type=integer value=51030></record>
+        <record name=do_connect_em_server type=integer value=0></record>
+        <record name=em_server_addr type=string value=192.168.1.16></record>
+        <record name=em_server_port type=integer value=51032></record>
+        <record name=em_server_heartbeat_interval_in_second type=integer value=3></record>
+        <record name=em_device_port type=integer value=51034></record>
+      </record>
+      <record name=connect_mqtt_config type=container>
+        <record name=do_connect_mqtt_server type=integer value=0></record>
+        <record name=mqtt_server_addr type=string value=69.231.154.44></record>
+        <record name=mqtt_server_port type=integer value=1883></record>
+        <record name=mqtt_message_qos type=integer value=1></record>
+      </record>
+      <record name=use_calibrated_color_image_flag type=integer value=0></record>
+      <record name=emm_log_file type=string value=/data/log/emm_log.txt></record>
+      <record name=enable_rtmp_live type=integer value=0></record>
+      <record name=rtmp_live_framerate type=integer value=20></record>
+      <record name=rtmp_live_send_depth_image type=integer value=1></record>
+      <record name=rtmp_live_type type=integer value=1></record>
+      <record name=rtmp_live_ip_address type=string value=192.168.1.80></record>
+      <record name=rtmp_live_port type=string value=1935></record>
+      <record name=fuse_vsm_object type=integer value=1></record>
+      <record name=fuse_config type=container>
+        <record name=sliding_time_N_max type=integer value=200></record>
+        <record name=timestamp_max_diff type=integer value=50></record>
+        <record name=timestamp_diff_threshold1 type=integer value=30></record>
+        <record name=timestamp_diff_threshold2 type=integer value=30></record>
+      </record>
+      <record name=track_config_path type=string value=/opt/vpm/base/track_param></record>
+      <record name=channel_number type=integer value=2></record>
+      <record name=vsm_channel1 type=container>
+        <record name=use_device type=integer value=1></record>
+        <record name=socket_addr type=string value=192.168.1.16></record>
+        <record name=socket_port type=integer value=51102></record>
+        <record name=terminal_type type=integer value=1></record>
+        <record name=dpm_model_name type=string value=yolox-s-dw-1.6.6-final.bin></record>
+        <record name=mute_audio type=integer value=0></record>
+        <record name=live_info type=container>
+          <record name=domain_name type=string value=push.magicdepth.com></record>
+          <record name=app_name type=string value=live></record>
+          <record name=stream_name type=string value=Vpm_Vsm1></record>
+          <record name=rand_key type=string value=0></record>
+          <record name=uid_key type=string value=0></record>
+          <record name=auth_key type=string value=Magicdepth620></record>
+        </record>
+      </record>
+      <record name=vsm_channel2 type=container>
+        <record name=use_device type=integer value=1></record>
+        <record name=socket_addr type=string value=192.168.1.16></record>
+        <record name=socket_port type=integer value=51102></record>
+        <record name=terminal_type type=integer value=1></record>
+        <record name=dpm_model_name type=string value=yolox-s-dw-1.6.6-final.bin></record>
+        <record name=mute_audio type=integer value=0></record>
+        <record name=live_info type=container>
+          <record name=domain_name type=string value=push.magicdepth.com></record>
+          <record name=app_name type=string value=live></record>
+          <record name=stream_name type=string value=Vpm_Vsm2></record>
+          <record name=rand_key type=string value=0></record>
+          <record name=uid_key type=string value=0></record>
+          <record name=auth_key type=string value=Magicdepth620></record>
+        </record>
+      </record>
+      <record name=slave_vpm_number type=integer value=0></record>
+      <record name=slave_vpm1 type=container>
+        <record name=slave_vpm_addr type=string value=192.168.1.18></record>
+        <record name=slave_terminal_number type=integer value=2></record>
+        <record name=slave_terminal1 type=container>
+          <record name=terminal_addr type=string value=192.168.1.13></record>
+          <record name=terminal_type type=integer value=3></record>
+        </record>
+        <record name=slave_terminal2 type=container>
+          <record name=terminal_addr type=string value=192.168.1.14></record>
+          <record name=terminal_type type=integer value=3></record>
+        </record>
+      </record>
+      <record name=slave_vpm2 type=container>
+        <record name=slave_vpm_addr type=string value=192.168.1.17></record>
+        <record name=slave_terminal_number type=integer value=2></record>
+        <record name=slave_terminal1 type=container>
+          <record name=terminal_addr type=string value=192.168.1.12></record>
+          <record name=terminal_type type=integer value=2></record>
+        </record>
+        <record name=slave_terminal2 type=container>
+          <record name=terminal_addr type=string value=192.168.1.15></record>
+          <record name=terminal_type type=integer value=2></record>
+        </record>
+      </record>
+      <record name=escalator_info type=container>
+        <record name=escalator_direction type=integer value=2></record>
+      </record>
+      <record name=save_stip_data type=integer value=0></record>
+      <record name=data_collecter type=container>
+        <record name=data_collecter_type type=integer value=0></record>
+        <record name=exit_when_load_failed type=integer value=0></record>
+        <record name=file_root_name type=string value=/opt/log2/vpm_data.dat></record>
+        <record name=buffer_size_in_megabyte type=integer value=32></record>
+        <record name=save_file_interval_in_second type=integer value=30></record>
+        <record name=support_alarm_save type=integer value=0></record>
+        <record name=alarm_save_time_length_in_MS type=integer value=5000></record>
+        <record name=nfs_server_ip_address type=string value=192.168.1.16></record>
+        <record name=remote_data_file_root_path type=string value=/data></record>
+        <record name=local_data_file_root_path type=string value=/opt/log2></record>
+        <record name=start_time type=string value=9:50></record>
+        <record name=end_time type=string value=22:10></record>
+      </record>
+      <record name=image_quality_threshold type=integer value=70></record>
+      <record name=image_quality_check_time_in_millisecond type=integer value=3000></record>
+      <record name=image_type type=integer value=20></record>
+      <record name=object_detect_plugin_config_file type=string value=/opt/vpm/base/inference_engine_plugin/plugins.xml></record>
+      <record name=object_detect_net_model_type type=integer value=0></record>
+      <record name=object_detect_net_model1 type=container>
+        <record name=object_detect_model_file_path type=string value=/opt/vpm/base/mobilenet_iter_10000.xml></record>
+        <record name=object_detect_training_data_file_path type=string value=/opt/vpm/base/mobilenet_iter_10000.bin></record>
+        <record name=object_detect_priority_file_path type=string value=/opt/vpm/base/priors_VSM_mb2_512_8190_20201210.npy></record>
+        <record name=object_detect_priority_input_rows type=integer value=8190></record>
+        <record name=object_detect_confidence_threshold type=double value=0.8></record>
+        <record name=object_detect_center_variance type=double value=0.1></record>
+        <record name=object_detect_size_variance type=double value=0.2></record>
+        <record name=object_detect_prob_threshold type=double value=0.1></record>
+        <record name=object_detect_top_k type=integer value=20></record>
+        <record name=object_detect_eps type=double value=0.00001></record>
+        <record name=object_detect_iou_threshold type=double value=0.45></record>
+      </record>
+      <record name=object_detect_net_model2 type=container>
+        <record name=object_detect_model_file_path type=string value=/opt/vpm/base/mobilenet_iter_10000.xml></record>
+        <record name=object_detect_training_data_file_path type=string value=/opt/vpm/base/mobilenet_iter_10000.bin></record>
+        <record name=object_detect_priority_file_path type=string value=/opt/vpm/base/priors_VSM_mb2_512_8190_20201210.npy></record>
+        <record name=object_detect_priority_input_rows type=integer value=8190></record>
+        <record name=object_detect_confidence_threshold type=double value=0.8></record>
+        <record name=object_detect_center_variance type=double value=0.1></record>
+        <record name=object_detect_size_variance type=double value=0.2></record>
+        <record name=object_detect_prob_threshold type=double value=0.1></record>
+        <record name=object_detect_top_k type=integer value=20></record>
+        <record name=object_detect_eps type=double value=0.00001></record>
+        <record name=object_detect_iou_threshold type=double value=0.45></record>
+      </record>
+      <record name=ipc_mutex_key type=integer value=2018></record>
+      <record name=share_memory_key type=integer value=2020></record>
+      <record name=share_memory_size_in_megabyte type=integer value=64></record>
+      <record name=audio_device_name type=string value=plughw:1,0></record>
+      <record name=audio_format type=integer value=2></record>
+      <record name=audio_sampling_frequencey type=integer value=44100></record>
+      <record name=audio_channel type=integer value=1></record>
+      <record name=voice_volume type=integer value=60></record>
+      <record name=voice_file_number type=integer value=25></record>
+      <record name=voice_file_list type=container>
+        <record name=voice_file1 type=string value=/opt/vpm/base/voice/smart_start_operation_warning_passenger_in_running_region.wav></record>
+        <record name=voice_file2 type=string value=/opt/vpm/base/voice/smart_stop_operation_warning_passenger_in_running_region.wav></record>
+        <record name=voice_file3 type=string value=/opt/vpm/base/voice/smart_start_operation_warning_passenger_in_waiting_region.wav></record>
+        <record name=voice_file4 type=string value=/opt/vpm/base/voice/smart_stop_operation_warning_passenger_in_waiting_region.wav></record>
+        <record name=voice_file5 type=string value=/opt/vpm/base/voice/baby_stroller_phase_iii.wav></record>
+        <record name=voice_file6 type=string value=/opt/vpm/base/voice/fall_down_phase_i.wav></record>
+        <record name=voice_file7 type=string value=/opt/vpm/base/voice/fall_down_phase_ii.wav></record>
+        <record name=voice_file8 type=string value=/opt/vpm/base/voice/exit_stack_phase_iii.wav></record>
+        <record name=voice_file9 type=string value=/opt/vpm/base/voice/wrong_direction.wav></record>
+        <record name=voice_file10 type=string value=/opt/vpm/base/voice/strentch_head_phase_ii.wav></record>
+        <record name=voice_file11 type=string value=/opt/vpm/base/voice/entrance_stack_phase_ii.wav></record>
+        <record name=voice_file12 type=string value=/opt/vpm/base/voice/exit_stack_phase_ii.wav></record>
+        <record name=voice_file13 type=string value=/opt/vpm/base/voice/child_appear.wav></record>
+        <record name=voice_file14 type=string value=/opt/vpm/base/voice/child_loitering.wav></record>
+        <record name=voice_file15 type=string value=/opt/vpm/base/voice/entrance_stack_phase_i.wav></record>
+        <record name=voice_file16 type=string value=/opt/vpm/base/voice/exit_stack_phase_i.wav></record>
+        <record name=voice_file17 type=string value=/opt/vpm/base/voice/strentch_head_phase_i.wav></record>
+        <record name=voice_file18 type=string value=/opt/vpm/base/voice/entrance_stay_phase_i.wav></record>
+        <record name=voice_file19 type=string value=/opt/vpm/base/voice/entrance_stay_phase_ii.wav></record>
+        <record name=voice_file20 type=string value=/opt/vpm/base/voice/exit_stay_phase_i.wav></record>
+        <record name=voice_file21 type=string value=/opt/vpm/base/voice/exit_stay_phase_ii.wav></record>
+        <record name=voice_file22 type=string value=/opt/vpm/base/voice/baby_stroller_phase_i.wav></record>
+        <record name=voice_file23 type=string value=/opt/vpm/base/voice/baby_stroller_phase_ii.wav></record>
+        <record name=voice_file24 type=string value=/opt/vpm/base/voice/luggage_phase_i.wav></record>
+        <record name=voice_file25 type=string value=/opt/vpm/base/voice/luggage_phase_ii.wav></record>
+      </record>
+      <record name=voice_repeat_times type=container>
+        <record name=voice_type1 type=integer value=0></record>
+        <record name=voice_type2 type=integer value=0></record>
+        <record name=voice_type3 type=integer value=0></record>
+        <record name=voice_type4 type=integer value=0></record>
+        <record name=voice_type5 type=integer value=0></record>
+        <record name=voice_type6 type=integer value=0></record>
+        <record name=voice_type7 type=integer value=0></record>
+        <record name=voice_type8 type=integer value=0></record>
+        <record name=voice_type9 type=integer value=0></record>
+        <record name=voice_type10 type=integer value=0></record>
+        <record name=voice_type11 type=integer value=0></record>
+        <record name=voice_type12 type=integer value=0></record>
+        <record name=voice_type13 type=integer value=0></record>
+        <record name=voice_type14 type=integer value=0></record>
+        <record name=voice_type15 type=integer value=0></record>
+        <record name=voice_type16 type=integer value=0></record>
+        <record name=voice_type17 type=integer value=0></record>
+        <record name=voice_type18 type=integer value=0></record>
+        <record name=voice_type19 type=integer value=0></record>
+        <record name=voice_type20 type=integer value=0></record>
+        <record name=voice_type21 type=integer value=0></record>
+        <record name=voice_type22 type=integer value=0></record>
+        <record name=voice_type23 type=integer value=0></record>
+        <record name=voice_type24 type=integer value=0></record>
+        <record name=voice_type25 type=integer value=0></record>
+      </record>
+      <record name=alarm_event_timer_timeout_in_second type=container>
+        <record name=timer_timeout_baby_stroller_phase_iii type=integer value=30></record>
+        <record name=timer_timeout_fall_down_phase_i type=integer value=30></record>
+        <record name=timer_timeout_fall_down_phase_ii type=integer value=30></record>
+        <record name=timer_timeout_exit_stack_phase_iii type=integer value=30></record>
+        <record name=timer_timeout_wrong_direction type=integer value=30></record>
+        <record name=timer_timeout_strentch_head_phase_ii type=integer value=30></record>
+        <record name=timer_timeout_entrance_stack_phase_ii type=integer value=30></record>
+        <record name=timer_timeout_exit_stack_phase_ii type=integer value=30></record>
+        <record name=timer_timeout_child_appear type=integer value=30></record>
+        <record name=timer_timeout_child_loitering type=integer value=30></record>
+        <record name=timer_timeout_entrance_stack_phase_i type=integer value=30></record>
+        <record name=timer_timeout_exit_stack_phase_i type=integer value=30></record>
+        <record name=timer_timeout_strentch_head_phase_i type=integer value=30></record>
+        <record name=timer_timeout_entrance_stay_phase_i type=integer value=30></record>
+        <record name=timer_timeout_entrance_stay_phase_ii type=integer value=30></record>
+        <record name=timer_timeout_exit_stay_phase_i type=integer value=30></record>
+        <record name=timer_timeout_exit_stay_phase_ii type=integer value=30></record>
+        <record name=timer_timeout_baby_stroller_phase_i type=integer value=30></record>
+        <record name=timer_timeout_baby_stroller_phase_ii type=integer value=30></record>
+        <record name=timer_timeout_luggage_phase_i type=integer value=30></record>
+        <record name=timer_timeout_luggage_phase_ii type=integer value=30></record>
+      </record>
+      <record name=smart_operation_check_period_in_second type=integer value=30></record>
+      <record name=smart_operation_timeout_period_in_second type=integer value=60></record>
+      <record name=device_control_type type=integer value=0></record>
+      <record name=io_device_name type=string value=/dev/ttyUSB0></record>
+      <record name=alarm_stream_buffer_size_in_megabyte type=integer value=16></record>
+      <record name=alarm_stream_buffer_time_in_millisecond type=integer value=5000></record>
+      <record name=manual_stop_escalator_when_warning type=integer value=1></record>
+      <record name=support_low_level_alarm_cover_area_alarm type=integer value=1></record>
+      <record name=vod_info type=container>
+        <record name=access_key_id type=string value=LTAI4FoRBqffAXRpSYCXzQj1></record>
+        <record name=access_key_secret type=string value=D23kgsJ2RLb6tvv36CKInId0uDbkca></record>
+        <record name=video_cate_id type=string value=1000126993></record>
+        <record name=storage_location type=string value=outin-b3e01eba755911ea889100163e1a65b6.oss-cn-beijing.aliyuncs.com></record>
+      </record>
+    </module>
+  </configuration>
+  <configuration name=test_configuration>
+  </configuration>
+</cd_configurations>

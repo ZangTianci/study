@@ -1,0 +1,405 @@
+##########################################################
+# 版本更新注意事项
+##########################################################
+版本更新之前确保模拟测试过5-10次
+
+##########################################################
+# 查看今天falldown图片的脚本
+##########################################################
+# 1F
+ssh firefly@10.18.0.22 "/home/firefly/archiconda3/bin/python /home/firefly/fred/q.py"
+# 2F
+ssh firefly@10.18.0.18 "/home/firefly/archiconda3/bin/python /home/firefly/fred/q.py"
+
+# 曝光控制文件
+
+##########################################################
+# 更新程序所在位置的账号密码
+##########################################################
+账号：150.158.53.110/dl.magicdepth.com
+用户名：ubuntu
+密码：1D6uS0zZmaZH
+ubuntu@150.158.53.110:/home/ubuntu/mddata/static/
+
+##########################################################
+# 查看falldown的图片信息
+##########################################################
+data.magicdepth.com
+账号：root
+密码：Rk7@82P#yQ
+路径：/var/chh/events/falldown/2022-03-28
+
+##########################################################
+# 拉falldown的dat
+##########################################################
+# lower_head_of_A
+scp -r firefly@10.18.0.22:/opt/tempNAS/000732845898/2022-03-29/353114
+# lower_head_of_B
+scp -r firefly@10.18.0.22:/opt/tempNAS/000732845886/2022-03-29/10/vpm_data_000732845886_2022-03-29_10_40_02.dat
+# upper_head_of_A
+scp -r firefly@10.18.0.18:/opt/tempNAS/0007328458a8/2022-03-29/
+# upper_head_of_B
+scp -r firefly@10.18.0.18:/opt/tempNAS/00073277bb59/2022-03-29/
+
+##########################################################
+# 坐标系标定软件的位置
+##########################################################
+D:\system\Desktop\work\Tools\calibrator\calibrator\dist/main.exe
+
+##########################################################
+# 分析falldown的图片的程序路径
+##########################################################
+D:\md\algo-exploration
+
+milestone版本在doc/releaseNote.md
+# MILESTONE #3 # 
+
+##########################################################
+# 切分track_params的程序路径
+##########################################################
+/home/ztc/code/cut_track_params.py
+
+更新完vpm，如果挂了就软件杀一下，不行就sudo reboot
+
+ssh root@192.168.1.250
+vi /userdata/dpm/base/user_deep_learning_process_server_configuration_horizon.xml
+reboot
+
+##########################################################
+# vsm守护进程更新
+##########################################################
+# vsm位置
+/system/bin/
+
+scp -r video_stereo_daemon firefly@10.18.0.22:/opt/temp/
+cd /opt/temp/
+scp -r firefly@192.168.1.85:/opt/temp/video_stereo_daemon ./
+# 19
+adb connect 192.168.1.102
+adb connect 192.168.1.100
+# 17
+adb connect 192.168.1.110
+adb connect 192.168.1.103
+# 21
+adb connect 192.168.1.120
+adb connect 192.168.1.121
+# 28
+adb connect 192.168.1.125
+adb connect 192.168.1.145
+adb push video_stereo_daemon /system/bin/
+adb shell
+reboot
+
+# mtc
+cd /opt/temp/
+scp -r magicdepth@192.168.1.82:/opt/temp/video_stereo_daemon ./
+# 47
+adb connect 192.168.1.141
+adb connect 192.168.1.182
+# 48
+adb connect 192.168.1.142
+adb connect 192.168.1.101
+# 49
+adb connect 192.168.1.173
+adb connect 192.168.1.14
+# 50
+adb connect 192.168.1.12
+adb connect 192.168.1.122
+adb push video_stereo_daemon /system/bin/
+adb shell
+reboot
+
+##########################################################
+# dpm模型位置
+##########################################################
+/userdata/dpm/base/model_config1
+/userdata/dpm/base/model_config2
+
+##########################################################
+# 断点续传
+##########################################################
+echo $password | sudo -S mount -t nfs -o intr,rw,async,wsize=32768,rsize=32768 $nasIP:/data /opt/tempNAS
+
+##########################################################
+# 看vsmMAC（物理）地址
+##########################################################
+adb shell
+cd /sys/class/net/eth0
+cat address
+86:b6:e0:e3:bb:bd
+
+##########################################################
+# 云服务器
+##########################################################
+42.192.152.239
+zangtianci
+!MagicDepth2022
+/home/yangkun/vpm/ubuntu_build/debug
+
+##########################################################
+# 现场vpmdat数据存放路径
+##########################################################
+/opt/log2
+
+##########################################################
+# 查看vsm模拟器（模拟测试）
+##########################################################
+ssh magicdepth@192.168.1.81
+ps -ef|grep vsm
+
+
+scp -r /media/ztc/Data/update/20220427_16/dpm/model_config* firefly@10.18.0.22:/home/firefly/ztc/
+scp -r /media/ztc/Data/update/20220427_16/dpm/model_config* firefly@10.18.0.18:/home/firefly/ztc/
+scp -r /home/firefly/ztc/model_config* magicdepth@192.168.1.21:/home/magicdepth/update/
+scp -r /home/firefly/ztc/model_config* magicdepth@192.168.1.28:/home/magicdepth/update/
+scp -r /home/firefly/ztc/model_config* magicdepth@192.168.1.17:/home/magicdepth/update/
+scp -r /home/firefly/ztc/model_config* magicdepth@192.168.1.19:/home/magicdepth/update/
+
+scp -r /home/magicdepth/update/model_config* root@192.168.1.250:/userdata/dpm/base/
+
+##########################################################
+# 查看儿童医院屏幕连接是否断开（去对应VPM上查看）
+##########################################################
+/media/ztc/Data/md_code/screen_state.sh
+
+##########################################################
+# 启动守护进程
+##########################################################
+cd /opt/vpm/base;sudo su; nohup ./video_stereo_daemon > /dev/null 2>&1 &
+
+##########################################################
+# 启动守护进程
+##########################################################
+ls -l /bin/sh
+
+##########################################################
+# vpm更新
+##########################################################
+scp -r /media/ztc/Data/update/20220429_10/vpm_v2.0.2022042801/vpm_v2.0.2022042801/vpm_v2.0.2022042801.zip ubuntu@150.158.53.110:/home/ubuntu/mddata/static/
+
+##########################################################
+# 现场VSM图片
+##########################################################
+/opt/log/vsm1_image.bmp
+/opt/log/vsm2_image.bmp
+
+##########################################################
+# 关防止VPM守护进程开进程
+##########################################################
+touch stop_vision_processing_server
+
+##########################################################
+# 手启动vsm
+##########################################################
+cd /data/vsm/vpm/base && export LD_LIBRARY_PATH=./ && ./video_stereo_server_V2
+
+# vpm的user_vision_processing_server_configuration.xml里的<record name=log_level type=integer value=1></record>
+改为0有log
+
+##########################################################
+# 更新vpm
+##########################################################
+bash update_vpm.sh http://dl.magicdepth.com:8000/static/vpm_v2.0.2022051001.zip ceb1854a6633537def27f0cd5b7f7871
+bash update_vsm.sh http://dl.magicdepth.com:8000/static/vsm_v2.0.2022050802.zip 192.168.1.125 71d2edb8f3641a3117759ce00a5d4de3
+bash update_dpm.sh http://dl.magicdepth.com:8000/static/dpm_v2.0.2022042201.zip 3cb9023851b104b765b9a15473864d3d 51
+
+##########################################################
+# 更新tips
+##########################################################
+更新完成后遇到问题先检查一下路径下是不是有stop没有删除
+
+##########################################################
+# 数据库账户密码
+##########################################################
+http://192.168.1.80:8081/
+账户：oldmanuser
+密码：oldmanpass
+
+##########################################################
+# 算法配置
+##########################################################
+track_param1/2
+
+##########################################################
+# 软件配置
+##########################################################
+user_
+
+##########################################################
+# VPM守护进程更新时候直接KILL掉就好勒
+##########################################################
+
+##########################################################
+# 更新通力现场VSM守护进程
+##########################################################
+scp -P 4022 video_stereo_daemon magicdepth@52.81.243.106:/home/magicdepth/temp
+scp -P 5022 video_stereo_daemon magicdepth@52.81.243.106:/home/magicdepth/temp
+
+##########################################################
+# 坐标系标定
+##########################################################
+/home/ztc/code/tools/dataset_toolset/utils/dat_decoder/sync_data_decoder.py
+选好dat所在文件夹，w保存图片，q退出
+
+##########################################################
+# 通力axis
+##########################################################
+scp -P 5022 axis.yml magicdepth@52.81.243.106:/home/magicdepth/ztc
+
+
+
+##########################################################
+# axis更新完要重启vsm
+##########################################################
+axis.yml位置存放在/system/etc/
+
+
+
+
+##########################################################
+# 存dat开关
+##########################################################
+name=data_collecter_type value=3
+
+##########################################################
+# axis_forward
+##########################################################
+axis.yml位置存放在/system/etc/
+
+##########################################################
+# 新版vsm
+##########################################################
+swap_camera 是 0
+
+##########################################################
+# user_vision_processing_server_configuration.xml
+##########################################################
+dat保存时间/vpm运行时间
+<record name=start_time type=string value=8:00></record>
+<record name=end_time type=string value=20:00></record>
+
+##########################################################
+# 儿童医院硬盘接在NAS上，/share
+##########################################################
+
+
+
+
+
+busybox vi /data/vsm/vpm/base/config.txt
+cd /opt/temp/vsm_player_client/
+
+cd /opt/vpm/base
+mkdir backupconfig
+cp -r user_video_stereo_daemon_configuration.xml user_vision_processing_server_configuration.xml track_param1 track_param2 backupconfig/
+cd backupconfig
+mkdir vsm1
+mkdir vsm2
+vsm1
+sudo adb pull /data/vsm/vpm/base/user_video_stereo_server_configuration.xml /opt/vpm/base/backupconfig/vsm1/
+vsm2
+sudo adb pull /data/vsm/vpm/base/user_video_stereo_server_configuration.xml /opt/vpm/base/backupconfig/vsm2/
+zip -r UBbackupconfig.zip backupconfig/*
+
+
+
+adb push axis.yml /system/etc
+adb push parameters.xml /system/etc
+adb push axis_forward.yml /system/etc
+
+
+
+##########################################################
+# 深度图信息保存在dat里
+##########################################################
+
+
+
+sudo mount -t nfs 192.168.1.88:/share/Data/0007328458a8/ /opt/tempNAS/0007328458a8/ -o nfsvers=4.0
+sudo mount -t nfs 192.168.1.88:/share/Data/00073277bb59/ /opt/tempNAS/00073277bb59/ -o nfsvers=4.0
+
+sudo mount -t nfs 192.168.1.89:/share/Data/000732845898/ /opt/tempNAS/000732845898/ -o nfsvers=4.0
+sudo mount -t nfs 192.168.1.89:/share/Data/000732845886/ /opt/tempNAS/000732845886/
+
+
+
+##########################################################
+# 清理ems
+##########################################################
+/opt/nginx/vod/mp4/warning/
+
+
+##########################################################
+# 开关kone信息发送
+##########################################################
+sftp://data.magicdepth.com/var/mddata/set_config.py
+python3 set_config.py
+
+
+
+
+增加vpm部署点位
+1.vpm 打卡 + cron
+2.监控 
+    config 设备列表 dev.json 
+    设备显示 dev_status_show
+    设置配置目标  set_deploy_value.py
+    设置报警开关  set_config.py
+
+
+
+##########################################################
+# vsm改ip
+##########################################################
+busybox vi /system/ipconfig.conf
+
+##########################################################
+# 关闭推流
+##########################################################
+      <record name=enable_rtmp_live type=integer value=1></record>改为0
+
+
+
+sudo rsync -avP /share/Data/000732845898/2022-10-11 /share/Data/000732845898/2022-10-12 /share/Data/000732845898/2022-10-13 /share/Data/000732845898/2022-10-14 /share/Data/000732845898/2022-10-15 /share/Data/000732845898/2022-10-16 ./LA/
+sudo rsync -avP /share/Data/000732845886/2022-10-11 /share/Data/000732845886/2022-10-12 /share/Data/000732845886/2022-10-13 /share/Data/000732845886/2022-10-14 /share/Data/000732845886/2022-10-15 /share/Data/000732845886/2022-10-16 ./LB/
+sudo rsync -avP /share/Data/0007328458a8/2022-10-11 /share/Data/0007328458a8/2022-10-12 /share/Data/0007328458a8/2022-10-13 /share/Data/0007328458a8/2022-10-14 /share/Data/0007328458a8/2022-10-15 /share/Data/0007328458a8/2022-10-16 ./UA/
+sudo rsync -avP /share/Data/00073277bb59/2022-10-11 /share/Data/00073277bb59/2022-10-12 /share/Data/00073277bb59/2022-10-13 /share/Data/00073277bb59/2022-10-14 /share/Data/00073277bb59/2022-10-15 /share/Data/00073277bb59/2022-10-16 ./UB/
+
+sudo rsync -avP /share/Data/000732845898/2022-10-17 ./LA/
+sudo rsync -avP /share/Data/000732845886/2022-10-17 ./LB/
+sudo rsync -avP /share/Data/0007328458a8/2022-10-17 ./UA/
+sudo rsync -avP /share/Data/00073277bb59/2022-10-17 ./UB/
+
+
+##########################################################
+# VPM程序跑不起来
+##########################################################
+注意测试模式开关test_mode=1的时候跑模拟测试
+vsm的work_mode=0
+
+
+##########################################################
+# 通力培训中心
+##########################################################
+vpm	192.168.1.51	magicdepth 123456	ssh 52.81.243.106 4022
+vpm	192.168.1.55	magicdepth 123456	ssh 52.81.243.106 5022
+
+##########################################################
+# 拥堵
+##########################################################
+event_config/json
+
+##########################################################
+# 美罗城推流
+##########################################################
+https://deva.magicdepth.com:8083/hls/mtc_Vpm48_Vsm205.m3u8
+https://deva.magicdepth.com:8083/hls/mtc_Vpm48_Vsm101.m3u8
+https://deva.magicdepth.com:8083/hls/mtc_Vpm49_Vsm173.m3u8
+https://deva.magicdepth.com:8083/hls/mtc_Vpm49_Vsm14.m3u8
+
+##########################################################
+# cppapp编译服务器
+##########################################################
+http://124.223.69.249:8080/job/Pipe_TaskJob/
+账号密码：jenkins/Guo.tao789!
+

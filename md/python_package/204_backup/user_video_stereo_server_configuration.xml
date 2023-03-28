@@ -1,0 +1,86 @@
+<cd_configurations name=rk3399>
+  <configuration name=default_configuration>
+    <module name=common_config>
+      <record name=console_configuration_file_name type=string value=console_configuration_file></record>
+      <record name=netcard_name type=string value=eth0></record>
+      <record name=daemon_listen_socket_addr type=string value=127.0.0.1></record>
+      <record name=daemon_listen_socket_port type=integer value=1025></record>
+      <record name=local_heartbeat_socket_addr type=string value=0.0.0.0></record>
+      <record name=local_heartbeat_socket_port type=integer value=1030></record>
+      <record name=local_heartbeat_interval_in_second type=integer value=2></record>
+      <record name=application_name type=string value=video_stereo_server_V2></record>
+      <record name=passage_direction type=integer value=0></record>
+    </module>
+    <module name=control_center>
+      <record name=serial_number type=string value=MDB20220215001></record>
+      <record name=vendor_name type=string value=Magicdepth></record>
+      <record name=socket_config type=container>
+        <record name=netcard_name type=string value=eth0></record>
+        <record name=server_addr type=string value=192.168.1.204></record>
+        <record name=server_port type=integer value=51102></record>
+      </record>
+      <record name=work_mode type=integer value=1></record>
+    </module>
+    <module name=stream_center>
+      <record name=image_width type=integer value=240></record>
+      <record name=image_height type=integer value=320></record>
+      <record name=image_frame_rate type=integer value=20></record>
+      <record name=calibration_file_name type=string value=/system/etc/axis.yml></record>
+      <record name=calibration_parameter_file_name type=string value=/system/etc/parameters.xml></record>
+      <record name=use_dynamic_calibration type=integer value=0></record>
+      <record name=dynamic_calibration_config type=container>
+        <record name=disparity_shift type=integer value=0></record>
+        <record name=focal_length type=integer value=150></record>
+        <record name=stretch_factor type=double value=1.0></record>
+        <record name=horizontal_translation type=integer value=0></record>
+        <record name=vertical_translation type=integer value=0></record>
+      </record>
+      <record name=calibrate_color_image_flag type=integer value=0></record>
+      <record name=swap_uv type=integer value=1></record>
+      <record name=swap_camera type=integer value=0></record>
+      <record name=disparity_min type=integer value=0></record>
+      <record name=disparity_max type=integer value=32></record>
+      <record name=window_scale type=integer value=5></record>
+      <record name=sgm_penalty1 type=integer value=60></record>
+      <record name=sgm_penalty2 type=integer value=150></record>
+      <record name=ddr_threshold type=integer value=0></record>
+      <record name=ddr_disparity_range type=integer value=0></record>
+      <record name=path_number type=integer value=8></record>
+      <record name=thread_number type=integer value=8></record>
+      <record name=opencl_enable type=integer value=1></record>
+      <record name=image_interval_sampling type=integer value=0></record> //0:off 1:on
+      <record name=disparity_filter type=integer value=14></record>
+      <record name=disparity_quality_threshold type=integer value=1000></record>
+      <record name=disparity_uniqueness_ratio type=integer value=5></record>
+      <record name=disparity_lr_max_diff type=integer value=1></record>
+      <record name=shift_offset type=double value=0></record>
+      <record name=shift_opt type=integer value=0></record>//0:- 1:+
+      <record name=calibrator_max_value  type=integer value=240></record>
+      <record name=exposure type=container>
+        <record name=frame_rate type=integer value=20></record>
+        <record name=adjust_sec type=integer value=10></record>
+        <record name=exposure_time type=integer value=50000></record>
+        <record name=exposure_level_count type=integer value=128></record>
+        <record name=image_black_quality_percent type=double value=2></record>
+        <record name=image_white_quality_percent type=double value=5></record>
+        <record name=image_black_warning_percent type=double value=5></record>
+        <record name=image_white_warning_percent type=double value=30></record>
+        <record name=image_out_of_service_sec type=integer value=10></record>
+        <record name=image_adjust_msec type=integer value=100></record>
+        <record name=image_highest_black_percent type=double value=2.0></record>
+        <record name=image_lowest_wb_ratio type=double value=3.0></record>
+        <record name=image_highest_wb_ratio type=double value=15.0></record>
+        <record name=image_black_percentage_k type=double value=1.5></record>
+        <record name=image_set_point type=double value=120.0></record>
+        <record name=image_kp type=double value=0.6></record>
+        <record name=image_ki type=double value=0.02></record>
+        <record name=image_kd type=double value=0.2></record>
+      </record>
+      <record name=mpp_encoder_config type=container>
+        <record name=rgb_image_bit_rate_in_Mbs type=double value=3.0></record>
+      </record>
+    </module>
+  </configuration>
+  <configuration name=test_configuration>
+  </configuration>
+</cd_configurations>

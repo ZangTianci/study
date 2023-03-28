@@ -1,0 +1,644 @@
+################################################################
+# numpy
+################################################################
+# 创建数组，数组相乘是对应元素相乘
+x = array([1, 2, 3])
+# 建立矩阵，矩阵相乘是矩阵乘法
+np.matrix([[1, 2], [3, 4])
+# 创建三位数组
+arr3 = np.array(range(5),ndmin=3)
+# 创建一个5行2列的二维数组，全为0（浮点数）
+np.zeros(5,2)
+# 随机数组,2行3列，[0,1)之间的
+np.random.rand(2,3)
+# 随机数组,3行6列，[1,10)
+np.random.randint(1, 10, (3,6))
+# 随机数组,三维数组,满足标准正态分布
+np.random.randn(4,2,3)
+# 设置随机数种子（只是第一次随机，之后不变）
+np.random.seed(1)
+# 线性序列(生成数组)
+np.arange(2, 11, 3)
+np.linespace(1,5,num=5,endpoint=True) # [1,5]
+# 查看数组形状
+m.shape
+# 重定义数组形状
+s = m.reshape(2,6)
+m.reshape(1,-1) # 重定义为一维数组（行），-1用来占位
+m.reshape(-1,1) # 重定义为一列，-1用来占位
+# 降维一维数组
+m.flatten()
+m.ravel()
+# 转置
+n.T
+# 布尔索引
+a>5 # 数组由True和False组成
+a[a>5] # 选出大于5的列出来
+# 数组广播
+
+################################################################
+# pandas
+################################################################
+
+
+# 统计列表各个元素出现次数
+import pandas as pd
+a = [1, 2, 3, 1, 1, 2]
+result = pd.value_counts(a)
+print result
+
+
+
+# 读取csv文件，txt文件
+pd.read_csv(
+	filepath_or_buffer,
+	sep=',',
+	header=None,
+	# header='infer'
+	names=["name","num"],
+	skiprows=2, # 忽略前两行,空行会自动跳过
+	skipfooter=2, # 忽略最后两行
+	comment="#" # 带#的行数不要
+	converters={"编号":str} # 让参数变成字符串类型，可以防止00123变成123
+	
+	engine='python'
+	encoding="utf-8"
+
+
+)
+
+# 读取excel文件
+pd.read_excel(
+	io, # 路径
+	sheet_name=0,
+	
+	
+	
+)
+
+df=pd.read_excel("/d/ssss")
+# 查看导入数据前5行
+df.head(5)
+# 查看数据后5行
+df.tail(5)
+# 查看数据规模（几行几列）
+df.shape
+# 查看数据行索引
+df.index
+# 查看数据列名
+df.colums
+# 查看数据集是否存在缺失值
+df.isnull()
+df.isnull().sum() # 看每列有多少缺失值
+# 查看整体信息
+df.info()
+# 进行简单描述统计
+df.describe()
+# 查看数据是否存在重复值
+ds.duplicated
+
+# 数据选取
+# 提取某列
+df["gender"]
+# 提取行
+df[5:11]
+
+# 提取数据的行和列
+# 基于标签的索引loc
+# 提取数据的5-10行，并返回姓名、年龄2列
+df.loc[5:10,["name","age"]]
+# 提取ztc这位用户的全部信息
+df.loc["ztc",:]
+# 提取年龄小于20的用户信息
+df.loc[df["age"]<20,:]
+# 提取数据前5行前3列数据
+df.iloc[0:5,0:3]
+# 提取第0行
+df.iloc[0,:]
+# 提取0-5行，1、3、5列
+df.iloc[0:5,[1,3,5]]
+
+# 默认抽一个样本
+df1.sample(
+	n=None, # 指定抽样的数量，默认为1
+	frac=None, # 按比例进行抽样
+	replace=None, # 是否允许抽样样本数量高于原数据集的数量
+	
+)
+
+df3=df.copy()
+# 数值转字符串类型
+df3["id"]=df3["id"].astype("str")
+# 去除美元符号
+df3["custom_amt"].str.strip("$")
+# 字符串类型转日期型
+df3["order_date"]=pd.to_datetime(df3["order_date"],format="%年%月%日")
+# 计算重复值数量
+df3.duplicated().sum()
+# 删除重复值
+df3.drop_duplicates(
+	inplace=True, # 若为True，结果覆盖原函数
+	ignore_index=True # 若为True，则重新索引
+	
+)
+
+# 处理异常值
+# 删除118行的异常值
+df3.drop(
+	index=118,
+	inplace=True)
+
+# 缺失值处理
+# 查看缺失值
+df3.isnull().sum()
+# 查看缺失值比例
+df3.isnull().mean()
+# 剔除缺失值比例大于50%的列
+df.loc[:,df3.isnull().mean()<=0.5]
+# 删除有缺失值的无论行列
+df.loc[:,df3.isnull().mean()<=0.5].dropna()
+# 平均值
+df3["age"].mean()
+# 填补缺失值
+df3["age"].fillna(df3["age"].mean())
+# backfill/bfill:用后面的值填充缺失值
+# pad/ffill:用前面的值填充缺失值
+df3["age"].fillna(method="bfill")
+
+# 文本数值的处理
+df4["gender"]
+# 首字母大写
+df4["gender"].apply(lambda x:x.title())
+df4["gender"].map(lambda x:x.title())
+# 字符串转为数字
+df4["gender"].map({"female":0,"male":1})
+df4["gender"].replace({"female":0,"male":1},inplace=True)
+# 去除符号
+df["custom_amt"].str.replace("$","")
+
+# 建立数据集
+df = pd.DataFrame({
+	'xueli':['chuzhong','xiaoxue'],
+	'xingbie':[1,0]
+})
+# 数据透视表
+pd.pivot_table(
+	data,
+	values=None, # 拉入“数”框的变量列表
+	index=None, # 拉入“行”框的变量列表
+	colums=None, # 拉入“列”框的变量列表
+	
+)
+
+# 分组运算
+df.groupby('xueli')
+df.groupby(['xueli','xingbie'])
+df.groupby('xueli').groups
+df.groupby('xueli').get_group('daxue')
+df.groupby('xueli').aggregate(np.min)
+
+# 多表合并与连接
+df3=pd.concat(
+	[df1,df2],
+	ignore_index=True # 重新索引
+)
+# 拼接行列不一样的表
+merge1=pd.merge(left=df3,right=df4,how='left',left_on='id',right_on='Id')
+
+# 数据表的导出
+merge1.to_csv("路径",
+	index=False, # 导出时没有索引
+	encoding="utf-8"
+	) # 
+merge1.to_excel("路径",sheet_name='user',index=False)
+
+# 绘图
+
+
+################################################################
+# matplotlib
+################################################################
+
+################################################################
+# pyqt5
+################################################################
+################################################################
+# 日期时间格式
+################################################################
+from PyQt5.QtCore import QDate, QTime, QDateTime, Qt
+now = QDate.currentDate()
+print(now.toString(Qt.ISODate))
+# 2022-04-15
+print(now.toString(Qt.DefaultLocaleLongDate))
+# 2022年4月15日星期五
+
+datetime = QDateTime.currentDateTime()
+print(datetime.toString())
+# 周五 4月 15 15:06:12 2022
+# UTC时间
+print('Universal datetime: ', datetime.toUTC().toString(Qt.ISODate))
+# 2022-04-15T07:26:38Z
+print(f'The offset from UTC is: {now.offsetFromUtc()} seconds')
+# The offset from UTC is: 28800 seconds
+
+time = QTime.currentTime()
+print(time.toString(Qt.DefaultLocaleLongDate))
+# CST 下午3:06:12
+
+d = QDate(2020, 4, 7)
+print(f'Days in month: {d.daysInMonth()}')
+# 这天的这个月有多少天
+print(f'Days in year: {d.daysInYear()}')
+# 这天的这年有多少天
+
+xmas1 = QDate(2019, 5, 1)
+now = QDate.currentDate()
+dayspassed = xmas1.daysTo(now)
+# 现在距离xmas1距离多少天
+
+# 日期时间计算，时间日期加减
+from PyQt5.QtCore import QDateTime, Qt
+now = QDateTime.currentDateTime()
+print(f'Today:', now.toString(Qt.ISODate))
+print(f'Adding 12 days: {now.addDays(12).toString(Qt.ISODate)}')
+print(f'Subtracting 22 days: {now.addDays(-22).toString(Qt.ISODate)}')
+print(f'Adding 50 seconds: {now.addSecs(50).toString(Qt.ISODate)}')
+print(f'Adding 3 months: {now.addMonths(3).toString(Qt.ISODate)}')
+print(f'Adding 12 years: {now.addYears(12).toString(Qt.ISODate)}')
+
+app = QApplication(sys.argv)
+# 每一pyqt5应用程序必须创建一个应用程序对象。sys.argv参数是一个列表，从命令行输入参数
+w = QWidget()
+# QWidget部件是pyqt5所有用户界面对象的基类。他为QWidget提供默认构造函数。默认构造函数没有父类。
+w.resize(250, 150)
+# resize()方法调整窗口的大小。这里是250px宽150px高
+w.move(300, 300)
+# move()方法移动窗口在屏幕上的位置到x = 300，y = 300坐标。
+w.setWindowTitle('Simple')
+# 设置窗口的标题
+w.show()
+# 显示在屏幕上
+sys.exit(app.exec_())
+# 进入应用程序的主循环。事件处理从这里开始。
+# 主循环从窗口系统接收事件，并将它们分派给应用程序小部件。
+# 如果我们调用exit方法或主部件被销毁，主循环就结束了。
+# sys.exit方法确保完全退出。将通知环境应用程序是如何结束的。
+# exec方法有一个下划线。这是因为exec是一个Python关键字。因此，使用了exec。
+
+self.setGeometry(300, 300, 300, 220)
+# locates the window on the screen and sets it size
+
+self.setWindowIcon(QIcon('0d.jpg'))
+# 设置应用程序图标
+# 创建一个QIcon对象。QIcon接收到要显示的图标的路径
+
+QToolTip.setFont(QFont('SansSerif', 10))
+# 此静态方法设置用于呈现工具提示的字体。
+# 使用10pt SansSerif字体。
+
+self.setToolTip('This is a <b>QWidget</b> widget')
+# 要创建一个工具提示，我们调用setTooltip方法。我们可以使用富文本格式。
+
+btn = QPushButton('Button', self)
+# 创建一个按钮小部件
+
+btn.resize(btn.sizeHint())
+# sizeHint()给出一个按钮推荐大小
+
+# 页面标题label
+self.label_0 = QLabel('页面间信号传递实例')
+# 设置label控件居中
+self.label_0.setAlignment(Qt.AlignCenter)
+# 设置字体样式
+self.label_0.setFont(QFont('宋体',12,QFont.Bold))
+# 创建单行文本输入框
+self.line_1 = QLineEdit()
+
+# 布局管理器
+self.h1_layout = QHBoxLayout() # 水平布局管理器
+self.h1_layout.addWidget(self.label_1)
+self.v_layout = QVBoxLayout()  # 垂直布局管理器
+self.v_layout.addStretch(1)
+# 该函数的作用就是平分布局，它所带的参数就是所占的比例。
+self.v_layout.addSpaceing(10)
+# 该函数的作用就是在该布局末尾加上一个长度为Size的空白项
+# 设置最终布局
+self.setLayout(self.v_layout)
+
+# 创建子页面按钮点击信号绑定槽函数
+self.create_button.clicked.connect(self.create_func)
+self.create_button = QPushButton('创建子页面')
+
+# 创建子页面
+self.child_widget = Child_Widget()
+# 子页面自定义信号绑定显示子页面信息方法
+self.child_widget.status_signal.connect(
+	self.child_widget_info)
+# 子页面信息显示方法
+def child_widget_info(self,info):
+	if info == 'create':
+		self.line_1.setText('子页面被创建')
+	elif info == 'close':
+		self.line_1.setText('子页面被关闭')
+
+定义信号 diy_signal = pyqtSignal(str)；
+信号激发：diy_signal.emit(需传递的数据)；
+接收信号：diy_signal.connect(激发的槽函数)。
+
+# 关闭方法
+# 重写关闭方法,将子页面关闭事件与自定义信号连接
+def closeEvent(self, event):
+    self.status_signal.emit('close')
+
+# 下拉列表框
+# QComboBox是一个集按钮和下拉选项于一体的控件，也称做下拉列表框
+self.comboBox = QComboBox()
+self.comboBox.addItems(['192.168.1.168','192.168.1.52','192.168.1.157'])
+# 返回选中选项的文本
+self.comboBox.currentText()
+# 下拉框尺寸重定义
+self.comboBox.setFixedSize(125,40)
+self.comboBox.setFixedWidth(125)
+# 清空列表框
+self.comboBox.clear()
+
+# 子页面
+def button_init(self):
+	self.button_set.clicked.connect(self.create_func)
+def create_func(self):
+	self.child_widget = Child_Widget()
+class Child_Widget(QWidget):
+    def __init__(self):
+        super(Child_Widget, self).__init__()
+
+# 路径按钮，选取文件夹，选取路径，选取文件
+self.cwd = os.getcwd()
+self.button_choose_savepic.clicked.connect(self.slot_button_choose_savepic)
+def slot_button_choose_savepic(self):
+	dir_choose = QFileDialog.getExistingDirectory(self, "选取文件夹", self.cwd) # 起始路径
+	if dir_choose == "":
+		print("\n取消选择")
+		return
+	else:
+		print(f"\n你选择的文件夹为:{dir_choose}")
+		self.line_4.setText(str(dir_choose))            
+		self.cwd = dir_choose
+
+# 窗口中心
+# 获得窗口
+qr = self.frameGeometry()
+#获得屏幕中心点
+cp = QDesktopWidget().availableGeometry().center()
+#显示到屏幕中心
+qr.moveCenter(cp)
+self.move(qr.topLeft())
+
+# QLabel标签
+# 标签框嵌入式，下渗式
+label.setFrameStyle(QFrame.Panel | QFrame.Sunken)
+# 标签位于框左下角|标签对齐方式
+label.setAlignment(Qt.AlignBottom | Qt.AlignRight)
+# 自动换行
+self.lb3.setWordWrap(True)
+
+pix = QPixmap('sexy.jpg')
+lb1 = QLabel(self)
+# 画线
+lb1.setStyleSheet("border: 2px solid red")
+# 载入图片
+lb1.setPixmap(pix)
+# 是否将缩放其内容以填充所有可用空间
+lb2.setScaledContents(True)
+
+# 点击按钮群
+self.ra1 = QRadioButton('左边',self)
+self.ra2 = QRadioButton('中间',self)
+self.ra3 = QRadioButton('右边',self)
+
+self.bg1 = QButtonGroup(self)
+self.bg1.addButton(self.ra1, 1)
+self.bg1.addButton(self.ra2, 2)
+self.bg1.addButton(self.ra3, 3)
+self.bg1.buttonClicked.connect(self.rbclicked)
+
+def rbclicked(self):
+	if self.bg1.checkedId() == 1:
+		self.lb1.setAlignment(Qt.AlignVCenter | Qt.AlignLeft)
+	elif self.bg1.checkedId() == 2:
+		self.lb1.setAlignment(Qt.AlignCenter)
+	elif self.bg1.checkedId() == 3:
+		self.lb1.setAlignment(Qt.AlignVCenter | Qt.AlignRight)
+
+# 进度条
+QProgressBar
+# 设定步骤个数
+progressbar.setRange(0, 10)
+# 通过 setValue 方法，指定当前完成到了哪一步
+progressbar.setValue(5)
+# ％p - 被完成的百分比取代
+# ％v - 被当前值替换
+# ％m - 被总step所取代
+self.progress_bar.setFormat("%m")
+
+# 弹出文本框
+QMessageBox.warning(self, '警告', '请选择拍图点')
+
+# 播放视频流、图片流
+self.img_path='/home/ztc/code/Calibrator_GUI/image/'
+	self.pic=os.listdir(self.img_path)
+	self.pic.sort()
+	self.it=iter(self.pic)
+
+timer1=QTimer(self)
+timer1.timeout.connect(self.timer_TimeOut)
+timer1.start(50)
+
+def timer_TimeOut(self):
+	self.piconwin=os.path.join(self.img_path,next(self.it))
+	self.pix=QPixmap(self.piconwin) 
+	self.pic_left.setPixmap(self.pix)
+	self.pic_right.setPixmap(self.pix)
+
+################################################################
+# ping3
+################################################################
+# ping ip
+1.
+from ping3 import ping, verbose_ping
+print(ping('192.168.1.9'))
+2.
+from tcping import Ping
+
+################################################################
+# 在 Python3 中，bytes 和 str 的互相转换方式是
+################################################################
+
+str.encode('utf-8')
+bytes.decode('utf-8')
+
+
+################################################################
+# 在 Python3 中，根据ip获取mac地址
+################################################################
+/home/ztc/code/demo/getmac.py
+
+
+################################################################
+# 文件非空
+################################################################
+if os.path.getsize(os.path.join(vsm1path,gt)):
+
+################################################################
+# 打开json格式txt，字典格式txt
+################################################################
+file=open(os.path.join(vsm1path,gt),"r",encoding="utf-8")
+
+        js = file.read()
+        dic = json.loads(js)   
+
+
+str1 = 'hello, world!'
+# 通过内置函数len计算字符串的长度
+print(len(str1)) # 13
+# 获得字符串首字母大写的拷贝
+print(str1.capitalize()) # Hello, world!
+# 获得字符串每个单词首字母大写的拷贝
+print(str1.title()) # Hello, World!
+# 获得字符串变大写后的拷贝
+print(str1.upper()) # HELLO, WORLD!
+# 从字符串中查找子串所在位置
+print(str1.find('or')) # 8
+print(str1.find('shit')) # -1
+# 与find类似但找不到子串时会引发异常
+# print(str1.index('or'))
+# print(str1.index('shit'))
+# 检查字符串是否以指定的字符串开头
+print(str1.startswith('He')) # False
+print(str1.startswith('hel')) # True
+# 检查字符串是否以指定的字符串结尾
+print(str1.endswith('!')) # True
+# 将字符串以指定的宽度居中并在两侧填充指定的字符
+print(str1.center(50, '*'))
+# 将字符串以指定的宽度靠右放置左侧填充指定的字符
+print(str1.rjust(50, ' '))
+str2 = 'abc123456'
+# 检查字符串是否由数字构成
+print(str2.isdigit())  # False
+# 检查字符串是否以字母构成
+print(str2.isalpha())  # False
+# 检查字符串是否以数字和字母构成
+print(str2.isalnum())  # True
+str3 = '  jackfrued@126.com '
+print(str3)
+# 获得字符串修剪左右两侧空格之后的拷贝
+print(str3.strip())
+
+list1 = [1, 3, 5, 7, 100]
+print(list1) # [1, 3, 5, 7, 100]
+# 乘号表示列表元素的重复
+list2 = ['hello'] * 3
+print(list2) # ['hello', 'hello', 'hello']
+# 计算列表长度(元素个数)
+print(len(list1)) # 5
+# 下标(索引)运算
+print(list1[0]) # 1
+print(list1[4]) # 100
+# print(list1[5])  # IndexError: list index out of range
+print(list1[-1]) # 100
+print(list1[-3]) # 5
+list1[2] = 300
+print(list1) # [1, 3, 300, 7, 100]
+# 通过循环用下标遍历列表元素
+for index in range(len(list1)):
+    print(list1[index])
+# 通过for循环遍历列表元素
+for elem in list1:
+    print(elem)
+# 通过enumerate函数处理列表之后再遍历可以同时获得元素索引和值
+for index, elem in enumerate(list1):
+    print(index, elem)
+
+list1 = [1, 3, 5, 7, 100]
+# 添加元素
+list1.append(200)
+list1.insert(1, 400)
+# 合并两个列表
+# list1.extend([1000, 2000])
+list1 += [1000, 2000]
+print(list1) # [1, 400, 3, 5, 7, 100, 200, 1000, 2000]
+print(len(list1)) # 9
+# 先通过成员运算判断元素是否在列表中，如果存在就删除该元素
+if 3 in list1:
+    list1.remove(3)
+if 1234 in list1:
+    list1.remove(1234)
+print(list1) # [1, 400, 5, 7, 100, 200, 1000, 2000]
+# 从指定的位置删除元素
+list1.pop(0)
+list1.pop(len(list1) - 1)
+print(list1) # [400, 5, 7, 100, 200, 1000]
+# 清空列表元素
+list1.clear()
+print(list1) # []
+
+fruits = ['grape', 'apple', 'strawberry', 'waxberry']
+fruits += ['pitaya', 'pear', 'mango']
+# 列表切片
+fruits2 = fruits[1:4]
+print(fruits2) # apple strawberry waxberry
+# 可以通过完整切片操作来复制列表
+fruits3 = fruits[:]
+print(fruits3) # ['grape', 'apple', 'strawberry', 'waxberry', 'pitaya', 'pear', 'mango']
+fruits4 = fruits[-3:-1]
+print(fruits4) # ['pitaya', 'pear']
+# 可以通过反向切片操作来获得倒转后的列表的拷贝
+fruits5 = fruits[::-1]
+print(fruits5) # ['mango', 'pear', 'pitaya', 'waxberry', 'strawberry', 'apple', 'grape']
+
+list1 = ['orange', 'apple', 'zoo', 'internationalization', 'blueberry']
+list2 = sorted(list1)
+# sorted函数返回列表排序后的拷贝不会修改传入的列表
+# 函数的设计就应该像sorted函数一样尽可能不产生副作用
+list3 = sorted(list1, reverse=True)
+# 通过key关键字参数指定根据字符串长度进行排序而不是默认的字母表顺序
+list4 = sorted(list1, key=len)
+print(list1)
+print(list2)
+print(list3)
+print(list4)
+# 给列表对象发出排序消息直接在列表对象上进行排序
+list1.sort(reverse=True)
+print(list1)
+
+# 定义元组
+t = ('骆昊', 38, True, '四川成都')
+print(t)
+# 获取元组中的元素
+print(t[0])
+print(t[3])
+# 遍历元组中的值
+for member in t:
+    print(member)
+# 重新给元组赋值
+# t[0] = '王大锤'  # TypeError
+# 变量t重新引用了新的元组原来的元组将被垃圾回收
+t = ('王大锤', 20, True, '云南昆明')
+print(t)
+# 将元组转换成列表
+person = list(t)
+print(person)
+# 列表是可以修改它的元素的
+person[0] = '李小龙'
+person[1] = 25
+print(person)
+# 将列表转换成元组
+fruits_list = ['apple', 'banana', 'orange']
+fruits_tuple = tuple(fruits_list)
+print(fruits_tuple)
+
+
+
+
+
+
+

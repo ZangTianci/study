@@ -1,0 +1,2 @@
+将当前目录下的所有文件和文件夹放到VSM下的一个文件夹，必须要保证vsm_install.sh和vsm文件夹、vsm_calibrate文件夹在同一个目录下，通过dos2unix修改vsm_install.sh格式，再修改vsm_install.sh权限，最后运行vsm_install.sh，完成部署。
+完成部署后，标定程序位于/data/vsm/cali，正式程序位于/data/vsm/vpm/base

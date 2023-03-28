@@ -1,0 +1,369 @@
+###############################################################
+# 为指令定义别名（快捷方式）
+###############################################################
+alias ztc='ps -ef|grep vision'
+
+###############################################################
+# 查进程
+###############################################################
+ps -ef|grep vision
+
+###############################################################
+# 在X3查进程
+###############################################################
+ps -wl|grep vision
+
+###############################################################
+# 30天前修改过的文件夹
+###############################################################
+find /opt/log2 -mtime +30 -name "2022*"
+
+###############################################################
+# 30天前修改过的文件夹并删除
+###############################################################
+find /opt/nginx/vod/mp4/warning/ -mtime +30 -name "*.jpg" -exec rm -rf {} \;
+
+###############################################################
+# 获取前一天时间、日期
+###############################################################
+cur_dateTime=`date '+%Y-%m-%d' -d "-1 days"`
+date +%Y-%m-%d,%H:%M:%S
+
+###############################################################
+# 更新更新脚本
+###############################################################
+#!/bin/bash
+# update update_vpm
+# mtc
+scp -r /D/system/Desktop/work/MD_code/tools/auto_update/update_vpm.sh magicdepth@10.18.0.34:/opt/temp/
+ssh magicdepth@10.18.0.34 "scp -r /opt/temp/update_vpm.sh magicdepth@192.168.1.47:/home/magicdepth/update/"
+ssh magicdepth@10.18.0.34 "scp -r /opt/temp/update_vpm.sh magicdepth@192.168.1.48:/home/magicdepth/update/"
+ssh magicdepth@10.18.0.34 "scp -r /opt/temp/update_vpm.sh magicdepth@192.168.1.49:/home/magicdepth/update/"
+ssh magicdepth@10.18.0.34 "scp -r /opt/temp/update_vpm.sh magicdepth@192.168.1.50:/home/magicdepth/update/"
+# children_hospital
+scp -r /D/system/Desktop/work/MD_code/tools/auto_update/update_vpm.sh firefly@192.168.1.86:/opt/temp/
+ssh firefly@192.168.1.86 "scp -r /opt/temp/update_vpm.sh magicdepth@192.168.1.17:/home/magicdepth/update/"
+ssh firefly@192.168.1.86 "scp -r /opt/temp/update_vpm.sh magicdepth@192.168.1.19:/home/magicdepth/update/"
+scp -r /D/system/Desktop/work/MD_code/tools/auto_update/update_vpm.sh firefly@10.18.0.18:/opt/temp/
+ssh firefly@10.18.0.18 "scp -r /opt/temp/update_vpm.sh magicdepth@192.168.1.21:/home/magicdepth/update/"
+ssh firefly@10.18.0.18 "scp -r /opt/temp/update_vpm.sh magicdepth@192.168.1.28:/home/magicdepth/update/"
+
+# update update_dpm
+# mtc
+scp -r /D/system/Desktop/work/MD_code/tools/auto_update/update_dpm.sh magicdepth@10.18.0.34:/opt/temp/
+ssh magicdepth@10.18.0.34 "scp -r /opt/temp/update_dpm.sh magicdepth@192.168.1.47:/home/magicdepth/update/"
+ssh magicdepth@10.18.0.34 "scp -r /opt/temp/update_dpm.sh magicdepth@192.168.1.48:/home/magicdepth/update/"
+ssh magicdepth@10.18.0.34 "scp -r /opt/temp/update_dpm.sh magicdepth@192.168.1.49:/home/magicdepth/update/"
+ssh magicdepth@10.18.0.34 "scp -r /opt/temp/update_dpm.sh magicdepth@192.168.1.50:/home/magicdepth/update/"
+# children_hospital
+scp -r /D/system/Desktop/work/MD_code/tools/auto_update/update_dpm.sh firefly@192.168.1.86:/opt/temp/
+ssh firefly@192.168.1.86 "scp -r /opt/temp/update_dpm.sh magicdepth@192.168.1.17:/home/magicdepth/update/"
+ssh firefly@192.168.1.86 "scp -r /opt/temp/update_dpm.sh magicdepth@192.168.1.19:/home/magicdepth/update/"
+scp -r /D/system/Desktop/work/MD_code/tools/auto_update/update_dpm.sh firefly@10.18.0.18:/opt/temp/
+ssh firefly@10.18.0.18 "scp -r /opt/temp/update_dpm.sh magicdepth@192.168.1.21:/home/magicdepth/update/"
+ssh firefly@10.18.0.18 "scp -r /opt/temp/update_dpm.sh magicdepth@192.168.1.28:/home/magicdepth/update/"
+
+###############################################################
+# 配置免密
+###############################################################
+################################################
+# 本地客户端生成公私钥：（一路回车默认即可）
+################################################
+ssh-keygen
+################################################
+# 确认 id_rsa （私钥）and id_rsa.pub (公钥)
+################################################
+ls ~/.ssh
+################################################
+# 上传公钥到目标设备
+################################################
+ssh-copy-id -i ~/.ssh/id_rsa.pub magicdepth@192.168.1.20
+ssh-copy-id -i ~/.ssh/id_rsa.pub magicdepth@192.168.1.7
+ssh-copy-id -i ~/.ssh/id_rsa.pub ubuntu@150.158.53.110
+ssh-copy-id -i ~/.ssh/id_rsa.pub ubuntu@150.158.53.110
+ssh-copy-id -i ~/.ssh/id_rsa.pub magicdepth@52.81.243.106 -p 4022
+
+###############################################################
+# 判断是否存在文件/目录
+###############################################################
+目录
+if [ ! -d "/D/nas/vpm/$pre_dateTime1" ] 
+文件  
+if [ ! -e /D/track_params_channel1.yml ]
+
+###############################################################
+# 删除所有文件/目录
+###############################################################
+rm -rf /D/nas/vpm/$pre_dateTime
+
+###############################################################
+# 修改某个文件里某一句 s/是开头  /是两句之间的分割 /g是结尾
+###############################################################
+sed -i 's/name=escalator_direction type=integer value=2/name=escalator_direction type=integer value=1/g' ./user_vision_processing_server_configuration.xml
+
+###############################################################
+# 发CI消息群、微信消息群
+###############################################################
+devid=`hostname`
+postdata="AutoUpdate<VPM_App>Vpm:${devid}"
+curl "http://www.goquant666.cn/news/news_md_ci/$postdata"
+
+###############################################################
+# 更改vsm配置文件
+###############################################################
+adb disconnect
+adb connect 192.168.1.173/14
+adb shell
+cd /data/vsm/vpm/base
+busybox vi user_video_stereo_server_configuration.xml
+/image_set_point
+
+###############################################################
+# 解压缩，-o不显示解压过程
+###############################################################
+unzip -o $vpm_version.zip
+
+###############################################################
+# 解压缩到指定文件夹
+###############################################################
+unzip -d /media/ztc/Data/work/LOG/17 /media/ztc/Data/work/LOG/17/vpmlog.zip
+
+###############################################################
+# 压缩
+###############################################################
+zip vpm.zip ./*
+
+###############################################################
+# 复制除了某个文件（夹）外的其他文件（夹）
+###############################################################
+ls |grep -v lower_head_of_A |xargs -i cp -r {} /d/test
+
+
+sudo openvpn --config /etc/openvpn/zang.ovpn --daemon
+
+sudo chown -R ztc:ztc ./opt
+
+###############################################################
+# shell跑python脚本
+###############################################################
+#!/bin/bash
+location=$1
+date=$2
+render_mode=$3
+path=`ls /d/Falldown/$location/dat/$date |grep -v scp`
+echo $path
+for subpath in $path
+do
+    python main.py \
+        --model_type YOLOX \
+        --model_path /d/md_code/model \
+        --input_type NDAT \
+        --input_path /d/Falldown/$location/dat/$date/$subpath \
+        --config_path_1 //magicdepth-NAS/test_data/sorted_data/xianchang/children_hospital/batch4/$location/config/vsm_1 \
+        --config_path_2 //magicdepth-NAS/test_data/sorted_data/xianchang/children_hospital/batch4/$location/config/vsm_2 \
+        --out_path /d/Falldown/$location/result/$date/$subpath \
+        --interest_type head \
+        --alg_config_path /d/md_code/algo-exploration/alg_config.json \
+        --render_mode $render_mode # offline,off,online,all
+done 
+
+###############################################################
+# 查看123.txt最后一百行的信息
+###############################################################
+tail -n 100 123.txt
+
+###############################################################
+# 挂载
+###############################################################
+sudo mount -t nfs /192..86 /NAS
+sudo mount -t cifs //192.168.1.7/dl_data /home/ztc/NasAll/dl_data -o username=zangtianci,password=ztc19991209,vers=1.0
+sudo mount -t nfs 192.168.1.7:/Alarm_Events/ /home/ztc/Alarm_Events/
+sudo mount -t nfs 192.168.1.7:/ /home/ztc/NAS/ -o nfsvers=4.0
+sudo mount -t nfs 192.168.1.21:/opt/log2/00073277bb59/ /opt/tempNAS/00073277bb59/ -o nfsvers=4.0
+sudo mount -t nfs /media/magicdepth/HIKSEMI#2 /opt/log2 -o nfsvers=4.0
+
+
+###############################################################
+# 获取10个当前目录下最小数据的文件
+###############################################################
+du -a * | sort -nr | tail
+
+###############################################################
+# shell字符串转数组
+###############################################################
+time_range='07 08 09 10 11 12 13 14 15 16 17 18'
+time_array=(time_range)
+
+###############################################################
+# shell字符串支持for循环(以空格为遍历条件)
+###############################################################
+
+###############################################################
+# 计算数组元素个数
+###############################################################
+count=${#size[*]}
+
+###############################################################
+# while
+###############################################################
+while(($i<$count1))
+        do
+            if [ ${size[i]} -lt 30000 ];then
+                echo ${name[i]}
+            fi
+            let 'i++'
+        done
+
+
+
+###############################################################
+# 查看大文件
+###############################################################
+
+du -h --max-depth=1
+
+###############################################################
+# vim查找、查看、寻找、find
+###############################################################
+1，从上往下查找，比如“string” ：   /string
+
+2，从下往上查找，比如“string” ： ?string 
+
+##########################################################
+# 看sh是bash还是dash
+##########################################################
+ls -l /bin/sh
+
+##########################################################
+# 运行脚本123.sh并将输出结果输出为out.txt
+##########################################################
+bash 123.sh > out.txt
+
+##########################################################
+# .ssh目录下,创建快捷ssh名字
+##########################################################
+
+##########################################################
+# 压缩时候把路径放.zip那个参数里，解压时候就只有一个路径了
+##########################################################
+
+
+##########################################################
+# rsync
+##########################################################
+sudo rsync -avP --exclude={'00','01','02','03','04','05','06','07','18','19','20','21','22','23'} firefly@192.168.1.86:/opt/tempNAS/000732845898/2022-06-11/ /home/ztc/Nas/test_data/sorted_data/xianchang/children_hospital/batch5/lower_head_of_A/dat/111/
+
+sudo rsync -avP firefly@192.168.1.86:/opt/tempNAS/000732845898/2022-06-20 firefly@192.168.1.86:/opt/tempNAS/000732845898/2022-06-21 firefly@192.168.1.86:/opt/tempNAS/000732845898/2022-06-22 firefly@192.168.1.86:/opt/tempNAS/000732845898/2022-06-23 firefly@192.168.1.86:/opt/tempNAS/000732845898/2022-06-24 firefly@192.168.1.86:/opt/tempNAS/000732845898/2022-06-25 firefly@192.168.1.86:/opt/tempNAS/000732845898/2022-06-26 ./LA/
+
+sudo rsync -avP /share/Data/000732845898/2022-06-20 /share/Data/000732845898/2022-06-21 /share/Data/000732845898/2022-06-22 /share/Data/000732845898/2022-06-23 /share/Data/000732845898/2022-06-24 /share/Data/000732845898/2022-06-25 /share/Data/000732845898/2022-06-26 ./LA/
+
+sudo rsync -avP firefly@192.168.1.85:/opt/tempNAS/0007328458a8/2022-06-19/19 magicdepth@192.168.1.21:/opt/tempNAS/0007328458a8/2022-06-19/20 ./UA/2022-06-19/
+
+
+sudo rsync -avP firefly@192.168.1.86:/opt/tempNAS/000732845886/2022-06-19/19 firefly@192.168.1.86:/opt/tempNAS/000732845886/2022-06-19/20 ./LB/2022-06-19/
+
+sudo rsync -avP firefly@192.168.1.85:/opt/tempNAS/00073277bb59/2022-06-19/19 magicdepth@192.168.1.21:/opt/tempNAS/00073277bb59/2022-06-19/20 ./UB/2022-06-19/
+
+
+
+sudo rsync -avP /share/Data/000732845898/2022-11-11 /share/Data/000732845898/2022-11-12 /share/Data/000732845898/2022-11-13 /share/Data/000732845898/2022-11-14 /share/Data/000732845898/2022-11-15 ./LA/
+sudo rsync -avP /share/Data/000732845886/2022-11-11 /share/Data/000732845886/2022-11-12 /share/Data/000732845886/2022-11-13 /share/Data/000732845886/2022-11-14 /share/Data/000732845886/2022-11-15 ./LB/
+sudo rsync -avP /share/Data/0007328458a8/2022-11-11 /share/Data/0007328458a8/2022-11-12 /share/Data/0007328458a8/2022-11-13 /share/Data/0007328458a8/2022-11-14 /share/Data/0007328458a8/2022-11-15 ./UA/
+sudo rsync -avP /share/Data/00073277bb59/2022-11-11 /share/Data/00073277bb59/2022-11-12 /share/Data/00073277bb59/2022-11-13 /share/Data/00073277bb59/2022-11-14 /share/Data/00073277bb59/2022-11-15 ./UB/
+
+
+
+sudo rsync -avP /share/Data/000732845898/2022-08-04 ./LA/
+
+
+
+
+
+
+
+
+sudo rsync -avP firefly@192.168.1.86:/opt/tempNAS/000732845898/2022-06-22/19 ./LA/
+
+sudo rsync -avP firefly@192.168.1.85:/opt/tempNAS/0007328458a8/2022-06-22/19 ./UA/
+sudo rsync -avP magicdepth@192.168.1.21:/opt/log2/0007328458a8/2022-06-22/19 ./UA/
+
+sudo rsync -avP firefly@192.168.1.86:/opt/tempNAS/000732845886/2022-06-22/19 ./LB/
+
+sudo rsync -avP firefly@192.168.1.85:/opt/tempNAS/00073277bb59/2022-06-22/19 ./UB/
+sudo rsync -avP magicdepth@192.168.1.21:/opt/log2/00073277bb59/2022-06-22/19 ./UB/
+
+vim ~/.bashrc
+alias vsm1="adb disconnect;adb connect 192.168.1.158;adb shell"
+alias vsm2="adb disconnect;adb connect 192.168.1.168;adb shell"
+
+cur_dateTime=`date '+%Y-%m-%d' -d "-1 days"`
+
+sudo rsync -avP /share/Data/0007328458a8/2022-06-27 ./UA/
+sudo rsync -avP /share/Data/00073277bb59/2022-06-27 ./UB/
+
+sudo rsync -avP /share/Data/000732845898/2022-09-27/19 ./LA/
+sudo rsync -avP /share/Data/000732845886/2022-09-27/19 ./LB/
+sudo rsync -avP /share/Data/0007328458a8/2022-09-27/19 ./UA/
+sudo rsync -avP /share/Data/00073277bb59/2022-09-27/19 ./UB/
+
+
+
+##########################################################
+# 用vim编辑
+##########################################################
+EDITOR=vi;export EDITOR
+
+##########################################################
+# ping环境内所有ip
+##########################################################
+nmap -sP 192.168.1.0/24
+
+sudo rsync -avP firefly@10.18.0.22:/opt/tempNAS/000732845898/2022-08-19/09 firefly@10.18.0.22:/opt/tempNAS/000732845898/2022-08-19/10 ./LA/
+sudo rsync -avP firefly@10.18.0.22:/opt/tempNAS/000732845886/2022-08-19/09 firefly@10.18.0.22:/opt/tempNAS/000732845886/2022-08-19/10 ./LB/
+sudo rsync -avP firefly@10.18.0.18:/opt/tempNAS/0007328458a8/2022-08-19/09 firefly@10.18.0.18:/opt/tempNAS/0007328458a8/2022-08-19/10 ./UA/
+sudo rsync -avP firefly@10.18.0.18:/opt/tempNAS/00073277bb59/2022-08-19/09 firefly@10.18.0.18:/opt/tempNAS/00073277bb59/2022-08-19/10 ./UB/
+
+##########################################################
+# ssh 跳板、proxycommand
+##########################################################
+/home/ztc/.ssh/config
+Host *
+ServerAliveInterval 60
+TCPKeepAlive yes
+ControlMaster auto
+ControlPath /home/ztc/.ssh/master_%r@%h:%p
+ControlPersist 12h
+StrictHostKeyChecking no
+
+Host mtc_ems
+    HostName 10.18.0.34
+    User magicdepth
+    Port 22
+
+Host mtc_vpm_47
+    HostName 192.168.1.47
+    User magicdepth
+    Port 22
+    ProxyCommand ssh -q -x -W %h:%p mtc_ems
+
+
+00 23 * * * /home/magicdepth/miniconda3/bin/python3 /home/magicdepth/ztc/mkdir_datatime_mtc.py > /dev/null 2>&1
+15 21 * * * python /home/magicdepth/ztc/touch_stop.py > /dev/null 2>&1
+
+##########################################################
+# 查找文件内某句话、内容
+##########################################################
+grep escalator_direction user_vision_processing_server_configuration.xml
+sed -n '/escalator_direction/p' user_vision_processing_server_configuration.xml
+
+##########################################################
+# 打印命令执行返回结果
+##########################################################
+用``
+sc=`ls`
+echo $sc
+
+##########################################################
+# 打包而非压缩
+##########################################################
+tar -cvf dat.tar *
